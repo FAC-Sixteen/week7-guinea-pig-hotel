@@ -1,0 +1,30 @@
+{
+  "name": "guinea-pig-hotel",
+  "version": "1.0.0",
+  "description": "guinea pig hotel app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FAC-Sixteen/gph.git"
+  },
+  "author": "Sam, Banna & Dylan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FAC-Sixteen/gph/issues"
+  },
+  "homepage": "https://github.com/FAC-Sixteen/gph#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.11",
+    "supertest": "^4.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.1"
+  },
+  "dependencies": {
+    "env2": "^2.2.2",
+    "pg": "^7.9.0",
+    "qs": "^6.7.0"
+  }
+}
