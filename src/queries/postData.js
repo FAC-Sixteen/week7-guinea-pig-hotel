@@ -32,7 +32,41 @@ const checkIn = (name, colour, gender, cb) => {
   );
 };
 
+const findGuinea = (name, colour, gender, cb) => {
+  console.log("find guinea");
+  databaseConnection.query(
+    "SELECT guinea_id FROM guinea_pigs WHERE guinea_name = $1 AND guinea_colour = $2 AND gender = $3 LIMIT 1",
+    [name, colour, gender],
+    (err, res) => {
+      if (err) {
+        return cb(err);
+      } else {
+        console.log(res.rows[0]["guinea_id"]);
+        cb(null, res.rows);
+      }
+    }
+  );
+};
+
+const newRoom = (id, cb) => {
+  console.log("new room");
+  databaseConnection.query(
+    "UPDATE rooms SET occupied = '1', guinea_id = $1 WHERE room_num = (SELECT room_num FROM rooms WHERE occupied = '0' LIMIT 1)",
+    [id],
+    (err, res) => {
+      if (err) {
+        return cb(err);
+      } else {
+        console.log(res);
+        cb(null, res);
+      }
+    }
+  );
+};
+
 module.exports = {
   checkIn,
-  countFrees
+  countFrees,
+  findGuinea,
+  newRoom
 };
