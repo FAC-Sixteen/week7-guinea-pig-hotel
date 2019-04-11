@@ -13,15 +13,10 @@ const handlerHome = (request, response) => {
         response.writeHead(500, { "Content-Type": "text/html" });
         response.end("<h1>500: server error</h1>");
       } else {
-        postData.countFrees((err, res) => {
-          if (err) console.log(err);
-          const emptyRooms = 10 - parseInt(res.rows[0].sum);
-          console.log("empty rooms: ", emptyRooms);
-          response.writeHead(200, {
-            "Content-Type": "text/html"
-          });
-          response.end(file);
+        response.writeHead(200, {
+          "Content-Type": "text/html"
         });
+        response.end(file);
       }
     }
   );
