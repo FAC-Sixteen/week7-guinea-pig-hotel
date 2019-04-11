@@ -11,7 +11,55 @@
       media="screen"
       href="/public/style.css"
     />
-    <script src="/public/dom.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <img
+        class="guinea-header-image"
+        src="/public/assets/guinea-peach.png"
+        alt=""
+      />
+      <h1>Guinea Pig Hotel</h1>
+    </header>
+    <main>
+      <form
+        aria-label="enter your guinea pig details"
+        class="form"
+        action="/check-in"
+        method="post"
+      >
+        <h3>check in your guinea pig here!</h3>
+        <label for="guinea-name">name</label>
+        <input
+          id="guinea-name"
+          type="text"
+          name="name"
+          value=""
+          placeholder="Barry"
+        />
+        <label for="colour-select">colour:</label>
+        <select id="colour-select" name="colour">
+          <option selected disabled hidden>choose</option>
+          <option value="white">white</option>
+          <option value="black">black</option>
+          <option value="black and white">black and white</option>
+          <option value="ginger">ginger</option>
+          <option value="brown">brown</option>
+          <option value="brown and white">brown and white</option>
+          <option value="gold">gold</option>
+        </select>
+        <label for="gender-select">gender</label>
+        <select id="gender-select" name="gender">
+          <option selected disabled hidden></option>
+          <option value="F">F</option>
+          <option value="M">M</option>
+        </select>
+        <button type="submit" name="button">check in!</button>
+      </form>
+      <section class="hotel">
+        <ul id="room-list"></ul>
+      </section>
+    </main>
+    <script src="/public/dom.js"></script>
+  </body>
 </html>

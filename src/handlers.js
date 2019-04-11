@@ -1,5 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+const querystring = require("querystring");
+const getData = require("./queries/getData");
+const postData = require("./queries/postData");
 
 const handlerHome = (request, response) => {
   fs.readFile(
@@ -10,10 +13,15 @@ const handlerHome = (request, response) => {
         response.writeHead(500, { "Content-Type": "text/html" });
         response.end("<h1>500: server error</h1>");
       } else {
-        response.writeHead(200, {
-          "Content-Type": "text/html"
+        postData.countFrees((err, res) => {
+          if (err) console.log(err);
+          const emptyRooms = 10 - parseInt(res.rows[0].sum);
+          console.log("empty rooms: ", emptyRooms);
+          response.writeHead(200, {
+            "Content-Type": "text/html"
+          });
+          response.end(file);
         });
-        response.end(file);
       }
     }
   );
@@ -45,7 +53,41 @@ const handlerPublic = (request, response) => {
   });
 };
 
+const handleRoomData = (request, response) => {
+  getData.getRoomData((err, res) => {
+    if (err) {
+      response.writeHead(500, "Content-Type:text/html");
+      response.end("<h1>Sorry, there was a problem getting the rooms<h1>");
+      console.log(err);
+    }
+    response.writeHead(200, {
+      "Content-Type": "text/html"
+    });
+    let rooms = JSON.stringify(res);
+    response.end(rooms);
+  });
+};
+
+const handleCheckIn = (request, response) => {
+  let data = "";
+  request.on("data", chunk => {
+    data += chunk;
+  });
+  request.on("end", () => {
+    const name = querystring.parse(data).name;
+    const colour = querystring.parse(data).colour;
+    const gender = querystring.parse(data).gender;
+    postData.checkIn(name, colour, gender, (err, res) => {
+      if (err) console.log(err);
+      response.writeHead(302, { Location: "/" });
+      response.end();
+    });
+  });
+};
+
 module.exports = {
   handlerHome,
-  handlerPublic
+  handlerPublic,
+  handleRoomData,
+  handleCheckIn
 };
