@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const querystring = require("querystring");
+const getData = require("./queries/getData");
 const postData = require("./queries/postData");
 
 const handlerHome = (request, response) => {
@@ -52,6 +53,21 @@ const handlerPublic = (request, response) => {
   });
 };
 
+const handleRoomData = (request, response) => {
+  getData.getRoomData((err, res) => {
+    if (err) {
+      response.writeHead(500, "Content-Type:text/html");
+      response.end("<h1>Sorry, there was a problem getting the rooms<h1>");
+      console.log(err);
+    }
+    response.writeHead(200, {
+      "Content-Type": "text/html"
+    });
+    let rooms = JSON.stringify(res);
+    response.end(rooms);
+  });
+};
+
 const handleCheckIn = (request, response) => {
   let data = "";
   request.on("data", chunk => {
@@ -72,5 +88,6 @@ const handleCheckIn = (request, response) => {
 module.exports = {
   handlerHome,
   handlerPublic,
+  handleRoomData,
   handleCheckIn
 };
