@@ -27,6 +27,21 @@ const handlerHome = (request, response) => {
   );
 };
 
+const handleFrees = (request, response) => {
+  postData.countFrees((err, res) => {
+    if (err) {
+      response.writeHead(500, "Content-Type:text/html");
+      response.end("<h1>Sorry, there was a problem getting the rooms<h1>");
+      console.log(err);
+    }
+    response.writeHead(200, {
+      "Content-Type": "text/html"
+    });
+    const emptyRooms = 10 - parseInt(res.rows[0].sum);
+    response.end(JSON.stringify(emptyRooms));
+  });
+};
+
 const handlerPublic = (request, response) => {
   const extension = request.url.split(".")[1];
   const extensionType = {
@@ -79,8 +94,16 @@ const handleCheckIn = (request, response) => {
     const gender = querystring.parse(data).gender;
     postData.checkIn(name, colour, gender, (err, res) => {
       if (err) console.log(err);
-      response.writeHead(302, { Location: "/" });
-      response.end();
+      postData.findGuinea(name, colour, gender, (err1, res1) => {
+        if (err1) console.log(err1);
+        console.log(res1[0]["guinea_id"]);
+        const guineaId = parseInt(res1[0]["guinea_id"]);
+        postData.newRoom(guineaId, (err2, res2) => {
+          if (err2) console.log(err2);
+          response.writeHead(302, { Location: "/" });
+          response.end();
+        });
+      });
     });
   });
 };
@@ -89,5 +112,6 @@ module.exports = {
   handlerHome,
   handlerPublic,
   handleRoomData,
-  handleCheckIn
+  handleCheckIn,
+  handleFrees
 };

@@ -7,6 +7,8 @@ const router = (request, response) => {
     handlers.handlerPublic(request, response);
   } else if (request.url === "/rooms") {
     handlers.handleRoomData(request, response);
+  } else if (request.url === "/frees") {
+    handlers.handleFrees(request, response);
   } else if (request.url === "/check-in") {
     handlers.handleCheckIn(request, response);
   } else {
