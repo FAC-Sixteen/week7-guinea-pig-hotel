@@ -94,8 +94,16 @@ const handleCheckIn = (request, response) => {
     const gender = querystring.parse(data).gender;
     postData.checkIn(name, colour, gender, (err, res) => {
       if (err) console.log(err);
-      response.writeHead(302, { Location: "/" });
-      response.end();
+      postData.findGuinea(name, colour, gender, (err1, res1) => {
+        if (err1) console.log(err1);
+        console.log(res1[0]["guinea_id"]);
+        const guineaId = parseInt(res1[0]["guinea_id"]);
+        postData.newRoom(guineaId, (err2, res2) => {
+          if (err2) console.log(err2);
+          response.writeHead(302, { Location: "/" });
+          response.end();
+        });
+      });
     });
   });
 };
