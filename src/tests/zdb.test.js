@@ -32,3 +32,45 @@ test("getRoomData", t => {
     });
   });
 });
+
+test("getGuineaData", t => {
+  runDbBuild((err, res) => {
+    t.error(err, "No Error");
+
+    let expected = [
+      {
+        guinea_id: 1,
+        guinea_name: "Fluffles",
+        guinea_colour: "Ginger",
+        gender: "F",
+        here: "1",
+        room_num: 101,
+        room_service: null
+      },
+      {
+        guinea_id: 2,
+        guinea_name: "Sparks",
+        guinea_colour: "Brown",
+        gender: "M",
+        here: "1",
+        room_num: 102,
+        room_service: null
+      },
+      {
+        guinea_id: 3,
+        guinea_name: "Spot",
+        guinea_colour: "Black and white",
+        gender: "M",
+        here: "1",
+        room_num: 205,
+        room_service: null
+      }
+    ];
+
+    getData.getGuineaData((err, result) => {
+      if (err) console.log(err);
+      t.deepEqual(result, expected, "returns expected data");
+      t.end();
+    });
+  });
+});
