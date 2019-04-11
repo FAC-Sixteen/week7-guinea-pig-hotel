@@ -27,6 +27,21 @@ const handlerHome = (request, response) => {
   );
 };
 
+const handleFrees = (request, response) => {
+  postData.countFrees((err, res) => {
+    if (err) {
+      response.writeHead(500, "Content-Type:text/html");
+      response.end("<h1>Sorry, there was a problem getting the rooms<h1>");
+      console.log(err);
+    }
+    response.writeHead(200, {
+      "Content-Type": "text/html"
+    });
+    const emptyRooms = 10 - parseInt(res.rows[0].sum);
+    response.end(JSON.stringify(emptyRooms));
+  });
+};
+
 const handlerPublic = (request, response) => {
   const extension = request.url.split(".")[1];
   const extensionType = {
@@ -89,5 +104,6 @@ module.exports = {
   handlerHome,
   handlerPublic,
   handleRoomData,
-  handleCheckIn
+  handleCheckIn,
+  handleFrees
 };
