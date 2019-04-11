@@ -4,7 +4,7 @@
   "description": "guinea pig hotel app",
   "main": "index.js",
   "scripts": {
-    "test": "tape src/tests/*.test.js | tap-spec",
+    "test": "NODE_ENV=test tape src/tests/*.test.js | tap-spec",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
