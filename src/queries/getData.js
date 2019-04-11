@@ -15,6 +15,8 @@ const getGuineaData = cb => {
     if (err) {
       cb(err);
     } else {
+      console.log("the response", res);
+      console.log("the rows", res.rows);
       cb(null, res.rows);
     }
   });
