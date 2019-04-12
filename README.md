@@ -46,6 +46,8 @@ Visual planning & database layout:
 ![](https://i.imgur.com/uBuMIHT.jpg)
 User journey:
 ![](https://files.gitter.im/foundersandcoders/week6-gph/rdKZ/IMG_6914.JPG)
+Database Scheme:
+![](http://i.imgur.com/fdy8ZeS.png)
 
 ## Hurdles (issues)
 ![hurdles](https://media.giphy.com/media/6whrgZbPXGJwrhwMAz/giphy.gif)
