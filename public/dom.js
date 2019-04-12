@@ -23,10 +23,10 @@ const getRooms = () => {
     .then(response => updateDom(response));
 };
 
-const getFrees = () => {
+const getFreeRooms = () => {
   fetch("/frees")
     .then(res => res.json())
     .then(response => updateButton(response));
 };
 getRooms();
-getFrees();
+getFreeRooms();
