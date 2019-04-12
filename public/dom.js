@@ -10,7 +10,6 @@ const updateDom = array => {
 };
 
 const updateButton = num => {
-  console.log(typeof num);
   const button = document.getElementById("submit-button");
   if (num === 0) {
     button.disabled = true;
