@@ -12,9 +12,9 @@ test("getRoomData", t => {
   runDbBuild((err, res) => {
     t.error(err, "No Error");
 
-    let expected = [
-      { room_id: 1, room_num: 101, guinea_id: null, occupied: "0" },
-      { room_id: 2, room_num: 102, guinea_id: null, occupied: "0" },
+    const expected = [
+      { room_id: 1, room_num: 101, guinea_id: null, occupied: "1" },
+      { room_id: 2, room_num: 102, guinea_id: null, occupied: "1" },
       { room_id: 3, room_num: 103, guinea_id: null, occupied: "0" },
       { room_id: 4, room_num: 104, guinea_id: null, occupied: "0" },
       { room_id: 5, room_num: 105, guinea_id: null, occupied: "0" },
@@ -22,7 +22,7 @@ test("getRoomData", t => {
       { room_id: 7, room_num: 202, guinea_id: null, occupied: "0" },
       { room_id: 8, room_num: 203, guinea_id: null, occupied: "0" },
       { room_id: 9, room_num: 204, guinea_id: null, occupied: "0" },
-      { room_id: 10, room_num: 205, guinea_id: null, occupied: "0" }
+      { room_id: 10, room_num: 205, guinea_id: null, occupied: "1" }
     ];
 
     getData.getRoomData((err, result) => {
@@ -37,7 +37,7 @@ test("getGuineaData", t => {
   runDbBuild((err, res) => {
     t.error(err, "No Error");
 
-    let expected = [
+    const expected = [
       {
         guinea_id: 1,
         guinea_name: "Fluffles",
@@ -79,7 +79,7 @@ test("postGuineaData", t => {
   runDbBuild((err, res) => {
     t.error(err, "No Error");
 
-    let expected = [
+    const expected = [
       {
         guinea_id: 1,
         guinea_name: "Fluffles",
@@ -113,7 +113,7 @@ test("postGuineaData", t => {
         guinea_colour: "Gold",
         gender: "M",
         here: "1",
-        room_num: 203,
+        room_num: 103,
         room_service: null
       }
     ];

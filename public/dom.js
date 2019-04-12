@@ -4,7 +4,7 @@ const updateDom = array => {
     const li = document.createElement("li");
     li.textContent = `room number ${item.room_num} is ${
       item.occupied === "0" ? "unoccupied" : "occupied"
-    }`;
+    } by ${item.guinea_id}`;
     roomList.appendChild(li);
   });
 };
