@@ -22,8 +22,8 @@ const handlerHome = (request, response) => {
   );
 };
 
-const handleFrees = (request, response) => {
-  postData.countFrees((err, res) => {
+const handleFreeRooms = (request, response) => {
+  postData.countFreeRooms((err, res) => {
     if (err) {
       response.writeHead(500, "Content-Type:text/html");
       response.end("<h1>Sorry, there was a problem getting the rooms<h1>");
@@ -102,5 +102,5 @@ module.exports = {
   handlerPublic,
   handleRoomData,
   handleCheckIn,
-  handleFrees
+  handleFreeRooms
 };

@@ -1,6 +1,6 @@
 const databaseConnection = require("../database/db_connection.js");
 
-const countFrees = cb => {
+const countFreeRooms = cb => {
   databaseConnection.query(
     "SELECT SUM(CAST(occupied AS INT)) FROM rooms",
     (err, res) => {
@@ -75,5 +75,5 @@ const guineaRoom = (roomNum, guineaId, cb) => {
 
 module.exports = {
   checkIn,
-  countFrees
+  countFreeRooms
 };
