@@ -12,7 +12,8 @@ const countFrees = cb => {
     }
   );
 };
-
+//SQL adds Guinea Pigs to table (name, colour, gender) & allocates ID //
+//Gets out ID from guinea_pigs table //
 const checkIn = (name, colour, gender, cb) => {
   console.log(`checking in ${name}`);
   databaseConnection.query(
@@ -34,6 +35,7 @@ const checkIn = (name, colour, gender, cb) => {
   );
 };
 
+// SQL takes guinea_id and assigs ID to that room if the room us unoccupied. Sends back room number //
 const newRoom = (id, cb) => {
   databaseConnection.query(
     "UPDATE rooms SET occupied = '1', guinea_id = $1 WHERE room_num = (SELECT room_num FROM rooms WHERE occupied = '0' LIMIT 1) RETURNING room_num",
@@ -53,6 +55,7 @@ const newRoom = (id, cb) => {
   );
 };
 
+// SQL takes roomNum & guineaId and updates guinea table. Assignes room_num to correct guinea pig //
 const guineaRoom = (roomNum, guineaId, cb) => {
   databaseConnection.query(
     "UPDATE guinea_pigs SET room_num = $1 WHERE guinea_id = $2",

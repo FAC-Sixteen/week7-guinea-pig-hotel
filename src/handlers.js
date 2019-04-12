@@ -78,6 +78,7 @@ const handleRoomData = (request, response) => {
   });
 };
 
+// Takes name, colour, gender from POST //
 const handleCheckIn = (request, response) => {
   let data = "";
   request.on("data", chunk => {
@@ -94,6 +95,7 @@ const handleCheckIn = (request, response) => {
     });
   });
 };
+// Sends the data to postData.checkIn  >>
 
 module.exports = {
   handlerHome,
