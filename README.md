@@ -8,6 +8,7 @@
 
  ![authors](https://media.giphy.com/media/GYlAnXsFWk4U0/giphy.gif)
 
+* Hosted on herokue here! https://guinea-pig-hotel.herokuapp.com/
 * To run this project locally, clone this repo and run `npm i` in your terminal
 * Use `npm start` to run this on http://localhost:7000
 
