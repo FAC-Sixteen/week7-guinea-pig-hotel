@@ -3,8 +3,8 @@ const updateDom = array => {
   array.forEach(item => {
     const li = document.createElement("li");
     li.textContent = `room number ${item.room_num} is ${
-      item.occupied === "0" ? "unoccupied" : "occupied"
-    } by ${item.guinea_id}`;
+      item.occupied === "0" ? "unoccupied" : `occupied by ${item.guinea_name}`
+    }`;
     roomList.appendChild(li);
   });
 };
