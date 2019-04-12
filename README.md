@@ -29,7 +29,7 @@
 - [x] Host on Heroku
 - [ ] Accessible!
 ### Features
-- [ ] Check in a guinea pig with POST method
+- [x] Check in a guinea pig with POST method
 - [ ] Receive confirmation of check-in
 - [ ] Check out a guinea pig (also with POST method)
 - [ ] Database of individual guinea pigs and rooms
