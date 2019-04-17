@@ -58,7 +58,7 @@ const newRoom = (id, cb) => {
 // SQL takes roomNum & guineaId and updates guinea table. Assignes room_num to correct guinea pig //
 const guineaRoom = (roomNum, guineaId, cb) => {
   databaseConnection.query(
-    "UPDATE guinea_pigs SET room_num = $1 WHERE guinea_id = $2",
+    "UPDATE guinea_pigs SET room_num = $1 WHERE guinea_id = $2 RETURNING guinea_id, guinea_name, room_num",
     [roomNum, guineaId],
     (err, res) => {
       if (err) {
@@ -67,7 +67,7 @@ const guineaRoom = (roomNum, guineaId, cb) => {
         console.log(
           `giving our guinea pig with id ${guineaId} a room: ${roomNum}`
         );
-        cb(null, res);
+        cb(null, res.rows);
       }
     }
   );
