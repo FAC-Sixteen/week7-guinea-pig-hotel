@@ -63,9 +63,8 @@ function passwordData(url = "", data = {}) {
 }
 
 document.getElementById("login-button").addEventListener("click", () => {
-  passwordData("/createusers", {
-    password: "password"
-  })
+  let password = document.getElementById("password-input").value;
+  passwordData("/createusers", password)
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.log(error));
 });
@@ -102,7 +101,6 @@ const fetchCheckin = guineaData => {
 getRooms();
 getFreeRooms();
 login_form.style.display = "none";
-
 
 check_in_form.addEventListener("submit", event => {
   event.preventDefault();
