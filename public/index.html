@@ -27,6 +27,7 @@
         class="form"
         action="/check-in"
         method="post"
+        id="check-in-form"
       >
         <h2>check in your guinea pig here!</h2>
         <label for="guinea-name">name</label>
@@ -54,9 +55,17 @@
           <option value="F">F</option>
           <option value="M">M</option>
         </select>
-        <button id="submit-button" type="submit" name="button">
+        <button id="check-in-button" type="submit" name="button">
           check in!
         </button>
+      </form>
+      <form class="form" action="" method="post" id="new-password-form">
+        <label for="new-username">your username is</label>
+        <input type="text" name="new-username" id="generated-username" />
+        <label for="password">please enter a password</label>
+        <input type="password" name="password" id="password-input" />
+        <br />
+        <button id="login-button" type="submit" name="button">submit</button>
       </form>
       <section class="hotel">
         <ul id="room-list"></ul>
