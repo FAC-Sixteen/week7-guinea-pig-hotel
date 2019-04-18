@@ -1,6 +1,6 @@
 BEGIN;
 
-  DROP TABLE IF EXISTS guinea_pigs, rooms
+  DROP TABLE IF EXISTS guinea_pigs, rooms, users
   CASCADE;
 
 CREATE TABLE guinea_pigs
@@ -22,6 +22,13 @@ CREATE TABLE rooms
   occupied BIT NOT NULL,
   CONSTRAINT guinea_id FOREIGN KEY (guinea_id) REFERENCES guinea_pigs (guinea_id)
 );
+
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL,
+    password NOT NULL
+)
 
 INSERT INTO guinea_pigs
   (guinea_name, guinea_colour, gender, here, room_num)
