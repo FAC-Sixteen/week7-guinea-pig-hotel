@@ -30,9 +30,13 @@ const getFreeRooms = () => {
     .then(response => updateButton(response));
 };
 
+const update = response => {
+  document.getElementById("generated-username").value = response;
+};
+
 getRooms();
 getFreeRooms();
 
-check_in_button.addEventListener("click", () => {
-  document.getElementById("generated-username").value = "hello";
-});
+// check_in_button.addEventListener("click", () => {
+//   document.getElementById("generated-username").value = "hello";
+// });
