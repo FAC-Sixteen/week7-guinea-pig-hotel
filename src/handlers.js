@@ -3,6 +3,7 @@ const path = require("path");
 const querystring = require("querystring");
 const getData = require("./queries/getData");
 const postData = require("./queries/postData");
+const hashData = require("./pwdGenerate");
 
 const handlerHome = (request, response) => {
   fs.readFile(
@@ -100,10 +101,16 @@ const handleCheckIn = (request, response) => {
 };
 // Sends the data to postData.checkIn  >>
 
+const handleUsers = (request, response) => {
+  // hashData();
+  console.log(response);
+};
+
 module.exports = {
   handlerHome,
   handlerPublic,
   handleRoomData,
   handleCheckIn,
-  handleFreeRooms
+  handleFreeRooms,
+  handleUsers
 };

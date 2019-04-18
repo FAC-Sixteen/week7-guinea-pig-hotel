@@ -22,6 +22,26 @@ const updateButton = num => {
   }
 };
 
+// const updatePassword = array => {
+//   const password = document.getElementById("password-input");
+//   const badCharacters = "drop table";
+
+//   const error = "";
+
+//   if(array.value = "") {
+//     error = "Please enter a password";
+//     alert(error);
+//     return false;
+
+//   } else if ((array.value.length < 5) || (array.value.length > 10)) {
+//     error = "Your password is the wrong length";
+//     alert(error);
+//     return false;
+
+//   } else if ()
+
+// }
+
 const getRooms = () => {
   roomList.innerHTML = "";
   fetch("/rooms")
@@ -34,6 +54,30 @@ const getFreeRooms = () => {
     .then(res => res.json())
     .then(response => updateButton(response));
 };
+
+function passwordData(url = "", data = {}) {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+}
+
+document.getElementById("login-button").addEventListener("click", () => {
+  passwordData("/createusers", {
+    password: "password"
+  })
+    .then(data => console.log(JSON.stringify(data)))
+    .catch(error => console.log(error));
+});
+
+//   fetch("/createuser")
+//   .then(res => res.json())
+//   .then(response => updatePassword(response));
+// };
+
+getRooms();
+getFreeRooms();
+passwordData();
 
 const updateLoginPage = loginData => {
   const { guinea_id, guinea_name, room_num } = loginData;
@@ -58,6 +102,7 @@ const fetchCheckin = guineaData => {
 getRooms();
 getFreeRooms();
 login_form.style.display = "none";
+
 
 check_in_form.addEventListener("submit", event => {
   event.preventDefault();

@@ -11,3 +11,5 @@ const hashPwd = (myPlaintextPassword, cb) => {
     }
   });
 };
+
+module.exports = hashPwd;
