@@ -1,7 +1,11 @@
+const check_in_form = document.getElementById("check-in-form");
 const check_in_button = document.getElementById("check-in-button");
+const login_form = document.getElementById("new-password-form");
+const generatedUsename = document.getElementById("generated-username");
+const welcomeMessage = document.getElementById("welcome");
+const roomList = document.getElementById("room-list");
 
 const updateDom = array => {
-  const roomList = document.getElementById("room-list");
   array.forEach(item => {
     const li = document.createElement("li");
     li.textContent = `room number ${item.room_num} is ${
@@ -39,6 +43,7 @@ const updateButton = num => {
 // }
 
 const getRooms = () => {
+  roomList.innerHTML = "";
   fetch("/rooms")
     .then(res => res.json())
     .then(response => updateDom(response));
@@ -74,6 +79,37 @@ getRooms();
 getFreeRooms();
 passwordData();
 
-// check_in_button.addEventListener("click", () => {
-//   document.getElementById("generated-username").value = "hello";
-// });
+const updateLoginPage = loginData => {
+  const { guinea_id, guinea_name, room_num } = loginData;
+  welcomeMessage.textContent = `Welcome, ${guinea_name}! Your room number is ${room_num} and your username for your stay is ${guinea_name +
+    guinea_id}. Please enter a password below:`;
+  generatedUsename.value = guinea_name + guinea_id;
+  check_in_form.style.display = "none";
+  login_form.style.display = "block";
+  login_form.setAttribute("aria-hidden", "false");
+  getRooms();
+};
+
+const fetchCheckin = guineaData => {
+  fetch("/check-in", {
+    method: "POST",
+    body: JSON.stringify(guineaData)
+  })
+    .then(res => res.json())
+    .then(json => updateLoginPage(json));
+};
+
+getRooms();
+getFreeRooms();
+login_form.style.display = "none";
+
+
+check_in_form.addEventListener("submit", event => {
+  event.preventDefault();
+  const values = {};
+  values.name = event.target.elements.name.value;
+  values.colour = event.target.elements.colour.value;
+  values.gender = event.target.elements.gender.value;
+  console.log(values);
+  fetchCheckin(values);
+});

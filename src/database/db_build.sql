@@ -27,8 +27,8 @@ CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
-    password NOT NULL
-)
+    password TEXT NOT NULL
+);
 
 INSERT INTO guinea_pigs
   (guinea_name, guinea_colour, gender, here, room_num)
