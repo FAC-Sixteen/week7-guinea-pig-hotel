@@ -1,9 +1,11 @@
 const check_in_form = document.getElementById("check-in-form");
 const check_in_button = document.getElementById("check-in-button");
 const new_login_form = document.getElementById("new-password-form");
+const login_form = document.getElementById("login-form");
 const generatedUsename = document.getElementById("generated-username");
 const welcomeMessage = document.getElementById("welcome");
 const roomList = document.getElementById("room-list");
+const errorMessage = document.getElementById("error-message");
 
 const updateDom = array => {
   array.forEach(item => {
@@ -37,13 +39,24 @@ const getFreeRooms = () => {
 
 const updateLoginPage = loginData => {
   const { guinea_id, guinea_name, room_num } = loginData;
-  welcomeMessage.textContent = `Welcome, ${guinea_name}! Your room number is ${room_num} and your username for your stay is ${guinea_name +
-    guinea_id}. Please enter a password below:`;
+  welcomeMessage.textContent = `welcome, ${guinea_name}! your room number is ${room_num} and your username for your stay is ${guinea_name +
+    guinea_id}. please enter a password below:`;
   generatedUsename.value = guinea_name + guinea_id;
   check_in_form.style.display = "none";
   login_form.style.display = "block";
   login_form.setAttribute("aria-hidden", "false");
   getRooms();
+};
+
+const incorrectLogin = loginData => {
+  const { username, password } = loginData;
+  if (username === false) {
+    errorMessage.textContent =
+      "user does not exist, please enter another username";
+  } else if (password === false) {
+    errorMessage.textContent =
+      "incorrect password, please enter the correct password";
+  }
 };
 
 const fetchCheckin = guineaData => {
@@ -52,7 +65,18 @@ const fetchCheckin = guineaData => {
     body: JSON.stringify(guineaData)
   })
     .then(res => res.json())
-    .then(json => updateLoginPage(json));
+    .then(json => updateLoginPage(json))
+    .catch(() => console.log("no data"));
+};
+
+const fetchLogin = loginData => {
+  fetch("/log-in", {
+    method: "POST",
+    body: JSON.stringify(loginData)
+  })
+    .then(res => res.json())
+    .then(json => incorrectLogin(json))
+    .catch(() => console.log("no data"));
 };
 
 getRooms();
@@ -67,4 +91,13 @@ check_in_form.addEventListener("submit", event => {
   values.gender = event.target.elements.gender.value;
   console.log(values);
   fetchCheckin(values);
+});
+
+login_form.addEventListener("submit", event => {
+  event.preventDefault();
+  const values = {};
+  values.username = event.target.elements.username.value;
+  values.password = event.target.elements.password.value;
+  console.log(values);
+  fetchLogin(values);
 });

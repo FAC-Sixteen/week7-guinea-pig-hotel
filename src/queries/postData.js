@@ -73,7 +73,22 @@ const guineaRoom = (roomNum, guineaId, cb) => {
   );
 };
 
+const checkUsername = (username, cb) => {
+  databaseConnection.query(
+    "SELECT username, password FROM users WHERE username = $1",
+    [username],
+    (err, res) => {
+      if (err) {
+        return cb(err);
+      } else {
+        cb(null, res.rows);
+      }
+    }
+  );
+};
+
 module.exports = {
   checkIn,
-  countFreeRooms
+  countFreeRooms,
+  checkUsername
 };
