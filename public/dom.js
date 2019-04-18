@@ -64,8 +64,8 @@ function passwordData(url = "", data = {}) {
   });
 }
 
-document.getElementById("login-button").addEventListener("click", () => {
-  let password = document.getElementById("password-input").value;
+document.getElementById("new-login-button").addEventListener("click", () => {
+  let password = document.getElementById("new-password-input").value;
   passwordData("/createusers", password)
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.log(error));
