@@ -24,6 +24,26 @@ const updateButton = num => {
   }
 };
 
+// const updatePassword = array => {
+//   const password = document.getElementById("password-input");
+//   const badCharacters = "drop table";
+
+//   const error = "";
+
+//   if(array.value = "") {
+//     error = "Please enter a password";
+//     alert(error);
+//     return false;
+
+//   } else if ((array.value.length < 5) || (array.value.length > 10)) {
+//     error = "Your password is the wrong length";
+//     alert(error);
+//     return false;
+
+//   } else if ()
+
+// }
+
 const getRooms = () => {
   roomList.innerHTML = "";
   fetch("/rooms")
@@ -37,14 +57,37 @@ const getFreeRooms = () => {
     .then(response => updateButton(response));
 };
 
+function passwordData(url = "", data = {}) {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+}
+
+document.getElementById("login-button").addEventListener("click", () => {
+  let password = document.getElementById("password-input").value;
+  passwordData("/createusers", password)
+    .then(data => console.log(JSON.stringify(data)))
+    .catch(error => console.log(error));
+});
+
+//   fetch("/createuser")
+//   .then(res => res.json())
+//   .then(response => updatePassword(response));
+// };
+
+getRooms();
+getFreeRooms();
+passwordData();
+
 const updateLoginPage = loginData => {
   const { guinea_id, guinea_name, room_num } = loginData;
   welcomeMessage.textContent = `welcome, ${guinea_name}! your room number is ${room_num} and your username for your stay is ${guinea_name +
     guinea_id}. please enter a password below:`;
   generatedUsename.value = guinea_name + guinea_id;
   check_in_form.style.display = "none";
-  login_form.style.display = "block";
-  login_form.setAttribute("aria-hidden", "false");
+  new_login_form.style.display = "block";
+  new_login_form.setAttribute("aria-hidden", "false");
   getRooms();
 };
 

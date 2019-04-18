@@ -13,6 +13,8 @@ const router = (request, response) => {
     handlers.handleCheckIn(request, response);
   } else if (request.url === "/log-in") {
     handlers.handleLogIn(request, response);
+  } else if (request.url === "/createusers") {
+    handlers.handleUsers(request, response);
   } else {
     response.writeHead(404, {
       "Content-Type": "text/html"

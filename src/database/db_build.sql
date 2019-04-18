@@ -26,8 +26,8 @@ CREATE TABLE rooms
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL
+    username TEXT,
+    password TEXT
 );
 
 INSERT INTO guinea_pigs

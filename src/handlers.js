@@ -3,6 +3,8 @@ const path = require("path");
 const querystring = require("querystring");
 const getData = require("./queries/getData");
 const postData = require("./queries/postData");
+const hashData = require("./pwdGenerate");
+const storePwd = require("./queries/hashData.js");
 
 const handlerHome = (request, response) => {
   fs.readFile(
@@ -100,23 +102,38 @@ const handleCheckIn = (request, response) => {
 };
 // Sends the data to postData.checkIn  >>
 
-const handleLogIn = (request, response) => {
+const handleUsers = (request, response) => {
   let data = "";
   request.on("data", chunk => {
     data += chunk;
   });
   request.on("end", () => {
-    data = JSON.parse(data);
-    const { username, password } = data;
-    console.log({ username, password });
-    postData.checkUsername(username, (err, res) => {
-      if (err) console.log(err);
-      response.writeHead(200, { "content-type": "application/json" });
-      console.log(res);
-      if (res.length === 0) {
-        response.end(JSON.stringify({ username: false, password: false }));
-      }
+    hashData(data, (err, res_one) => {
+      storePwd(res_one, (err, res) => {
+        console.log(res_one);
+        if (err) console.log(err);
+        response.writeHead(200, { "content-type": "application/json" });
+        response.end();
+      });
     });
+  });
+};
+
+const handleLogIn = (request, response) => {
+  let data = "";
+  request.on("data", chunk => {
+    data += chunk;
+  });
+  data = JSON.parse(data);
+  const { username, password } = data;
+  console.log({ username, password });
+  postData.checkUsername(username, (err, res) => {
+    if (err) console.log(err);
+    response.writeHead(200, { "content-type": "application/json" });
+    console.log(res);
+    if (res.length === 0) {
+      response.end(JSON.stringify({ username: false, password: false }));
+    }
   });
 };
 
@@ -126,5 +143,6 @@ module.exports = {
   handleRoomData,
   handleCheckIn,
   handleFreeRooms,
-  handleLogIn
+  handleLogIn,
+  handleUsers
 };
