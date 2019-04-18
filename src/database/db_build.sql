@@ -54,4 +54,11 @@ VALUES
   (204, '0', null),
   (205, '1', 3);
 
+  INSERT INTO users
+  (
+  username, password
+  )
+VALUES
+  ('username', 'password');
+
 COMMIT;

@@ -119,11 +119,30 @@ const handleUsers = (request, response) => {
   });
 };
 
+const handleLogIn = (request, response) => {
+  let data = "";
+  request.on("data", chunk => {
+    data += chunk;
+  });
+  data = JSON.parse(data);
+  const { username, password } = data;
+  console.log({ username, password });
+  postData.checkUsername(username, (err, res) => {
+    if (err) console.log(err);
+    response.writeHead(200, { "content-type": "application/json" });
+    console.log(res);
+    if (res.length === 0) {
+      response.end(JSON.stringify({ username: false, password: false }));
+    }
+  });
+};
+
 module.exports = {
   handlerHome,
   handlerPublic,
   handleRoomData,
   handleCheckIn,
   handleFreeRooms,
+  handleLogIn,
   handleUsers
 };
