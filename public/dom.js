@@ -1,5 +1,3 @@
-import { url } from "inspector";
-
 const check_in_button = document.getElementById("check-in-button");
 
 const updateDom = array => {
@@ -56,14 +54,16 @@ function passwordData(url = "", data = {}) {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(data)
-  }).then(response => response.json());
+  });
 }
 
-passwordData("/createusers", {
-  password: document.getElementById("password-input").value
-})
-  .then(data => console.log(JSON.stringify(data)))
-  .catch(error => console.log(error));
+document.getElementById("login-button").addEventListener("click", () => {
+  passwordData("/createusers", {
+    password: "password"
+  })
+    .then(data => console.log(JSON.stringify(data)))
+    .catch(error => console.log(error));
+});
 
 //   fetch("/createuser")
 //   .then(res => res.json())

@@ -12,7 +12,7 @@ const router = (request, response) => {
   } else if (request.url === "/check-in") {
     handlers.handleCheckIn(request, response);
   } else if (request.url === "/createusers") {
-    handlers.handleCheckIn(request, response);
+    handlers.handleUsers(request, response);
   } else {
     response.writeHead(404, {
       "Content-Type": "text/html"

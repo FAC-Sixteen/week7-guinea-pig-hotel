@@ -100,7 +100,7 @@ const handleCheckIn = (request, response) => {
 
 const handleUsers = (request, response) => {
   // hashData();
-  console.log(request);
+  console.log(response);
 };
 
 module.exports = {
