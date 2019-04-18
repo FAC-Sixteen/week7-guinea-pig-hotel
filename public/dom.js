@@ -1,6 +1,6 @@
 const check_in_form = document.getElementById("check-in-form");
 const check_in_button = document.getElementById("check-in-button");
-const login_form = document.getElementById("new-password-form");
+const new_login_form = document.getElementById("new-password-form");
 const generatedUsename = document.getElementById("generated-username");
 const welcomeMessage = document.getElementById("welcome");
 const roomList = document.getElementById("room-list");
@@ -57,7 +57,7 @@ const fetchCheckin = guineaData => {
 
 getRooms();
 getFreeRooms();
-login_form.style.display = "none";
+new_login_form.style.display = "none";
 
 check_in_form.addEventListener("submit", event => {
   event.preventDefault();

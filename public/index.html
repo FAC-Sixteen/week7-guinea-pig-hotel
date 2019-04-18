@@ -37,9 +37,10 @@
           name="name"
           value=""
           placeholder="Barry"
+          required
         />
         <label for="colour-select">colour:</label>
-        <select id="colour-select" name="colour">
+        <select id="colour-select" name="colour" required>
           <option selected disabled hidden>choose</option>
           <option value="white">white</option>
           <option value="black">black</option>
@@ -49,8 +50,8 @@
           <option value="brown and white">brown and white</option>
           <option value="gold">gold</option>
         </select>
-        <label for="gender-select">gender</label>
-        <select id="gender-select" name="gender">
+        <label for="gender-select">sex:</label>
+        <select id="gender-select" name="gender" required>
           <option selected disabled hidden></option>
           <option value="F">F</option>
           <option value="M">M</option>
@@ -74,9 +75,25 @@
           id="generated-username"
           disabled
         />
-        <label for="password">please enter a password</label>
-        <input type="password" name="password" id="password-input" />
+        <label for="new-password-input">please enter a password</label>
+        <input
+          type="password"
+          name="password"
+          id="new-password-input"
+          required
+        />
         <br />
+        <button id="new-login-button" type="submit" name="button">
+          submit
+        </button>
+      </form>
+
+      <form class="form" action="" method="post" id="login-form">
+        <h2>already a guest? check in here!</h2>
+        <label for="username">username:</label>
+        <input type="text" name="username" id="username" required />
+        <label for="password">password:</label>
+        <input type="password" name="password" id="password-input" required />
         <button id="login-button" type="submit" name="button">submit</button>
       </form>
       <section class="hotel">
