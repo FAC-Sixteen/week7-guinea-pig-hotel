@@ -42,6 +42,7 @@ const updateLoginPage = loginData => {
   generatedUsename.value = guinea_name + guinea_id;
   check_in_form.style.display = "none";
   login_form.style.display = "block";
+  login_form.setAttribute("aria-hidden", "false");
   getRooms();
 };
 
