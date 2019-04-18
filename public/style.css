@@ -9,3 +9,19 @@ header {
 .guinea-header-image {
   height: 200px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+}
+
+.hotel {
+  width: 100vw;
+}
+
+/* #login {
+}
+
+#check-in-form {
+} */

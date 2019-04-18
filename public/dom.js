@@ -1,3 +1,5 @@
+const check_in_button = document.getElementById("check-in-button");
+
 const updateDom = array => {
   const roomList = document.getElementById("room-list");
   array.forEach(item => {
@@ -10,10 +12,9 @@ const updateDom = array => {
 };
 
 const updateButton = num => {
-  const button = document.getElementById("submit-button");
   if (num === 0) {
-    button.disabled = true;
-    button.textContent = "sorry, we're full!";
+    check_in_button.disabled = true;
+    check_in_button.textContent = "sorry, we're full!";
   }
 };
 
@@ -28,5 +29,14 @@ const getFreeRooms = () => {
     .then(res => res.json())
     .then(response => updateButton(response));
 };
+
+const update = response => {
+  document.getElementById("generated-username").value = response;
+};
+
 getRooms();
 getFreeRooms();
+
+// check_in_button.addEventListener("click", () => {
+//   document.getElementById("generated-username").value = "hello";
+// });
