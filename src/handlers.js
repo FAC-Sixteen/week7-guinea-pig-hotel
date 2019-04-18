@@ -85,13 +85,16 @@ const handleCheckIn = (request, response) => {
     data += chunk;
   });
   request.on("end", () => {
-    const name = querystring.parse(data).name;
-    const colour = querystring.parse(data).colour;
-    const gender = querystring.parse(data).gender;
+    data = JSON.parse(data);
+    const name = data.name;
+    const colour = data.colour;
+    const gender = data.gender;
+    console.log({ name, colour, gender });
     postData.checkIn(name, colour, gender, (err, res) => {
       if (err) console.log(err);
-      response.writeHead(302, { Location: "/" });
-      response.end();
+      response.writeHead(200, { "content-type": "application/json" });
+      console.log(res);
+      response.end(JSON.stringify(res[0]));
     });
   });
 };
