@@ -11,6 +11,8 @@ const router = (request, response) => {
     handlers.handleFreeRooms(request, response);
   } else if (request.url === "/check-in") {
     handlers.handleCheckIn(request, response);
+  } else if (request.url === "/createusers") {
+    handlers.handleCheckIn(request, response);
   } else {
     response.writeHead(404, {
       "Content-Type": "text/html"
