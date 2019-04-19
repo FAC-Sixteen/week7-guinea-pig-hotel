@@ -5,7 +5,7 @@ const getData = require("./queries/getData");
 const postData = require("./queries/postData");
 const { hashPwd, comparePasswords } = require("./pwdGenerate");
 const storePwd = require("./queries/hashData.js");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const secret = process.env.secret;
 
 const handlerHome = (request, response) => {
@@ -153,26 +153,31 @@ const handleLogIn = (request, response) => {
     data = JSON.parse(data);
     const { username, password } = data;
     console.log({ username, password });
+    let cookie = jwt.sign(data.username, secret);
+
     postData.checkUsername(username, (err, usernameRes) => {
       if (err) console.log(err);
-      response.writeHead(200, { "content-type": "application/json" });
-      console.log({ usernameRes });
-      if (usernameRes.length === 0) {
-        response.end(JSON.stringify({ username: false, password: false }));
-      } else {
-        comparePasswords(password, usernameRes.password, (err, pwdRes) => {
-          if (err) console.log(err);
-          else {
-            if (!pwdRes) {
-              response.end(JSON.stringify({ username: true, password: false }));
-            } else if (pwdRes) {
-              response.writeHead(302, { Location: "/user-page" });
-              response.end();
-            }
-          }
-        });
-      }
+      // response.writeHead(200, { "content-type": "application/json" });
+      // console.log({ usernameRes });
+      // if (usernameRes.length === 0) {
+      //   response.end(JSON.stringify({ username: false, password: false }));
+      // } else {
+      //   comparePasswords(password, usernameRes.password, (err, pwdRes) => {
+      //     if (err) console.log(err);
+      //     else {
+      //       if (!pwdRes) {
+      //         response.end(JSON.stringify({ username: true, password: false }));
+      //       } else if (pwdRes) {
+      response.writeHead(302, {
+        location: "/public/userPage.html",
+        "set-cookie": `jwt=${cookie}; HttpOnly`
+      });
+      response.end();
     });
+    // }
+    //         });
+    //       }
+    //     });
   });
 };
 
