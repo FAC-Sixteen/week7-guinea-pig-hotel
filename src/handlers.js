@@ -128,9 +128,7 @@ const handleUsers = (request, response) => {
 
   request.on("end", () => {
     data = JSON.parse(data);
-    console.log(data);
-    console.log(data.password);
-    hashPwd(data.password, (err, res_one) => {
+    hashData(data.password, (err, res_one) => {
       storePwd(res_one, (err, res) => {
         console.log("backend password", res_one);
         if (err) console.log(err);
