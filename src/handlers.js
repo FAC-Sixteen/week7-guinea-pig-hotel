@@ -110,8 +110,6 @@ const handleUsers = (request, response) => {
   
   request.on("end", () => {
     data = JSON.parse(data)
-    console.log(data)
-    console.log(data.password)
     hashData(data.password, (err, res_one) => {
       storePwd(res_one, (err, res) => {
         console.log('backend password', res_one);
