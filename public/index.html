@@ -75,11 +75,12 @@
           id="generated-username"
           disabled
         />
-        <label for="new-password-input">please enter a password</label>
+        <label for="new-password-input">please enter a password (your password must contain at least 1 uppercase character, a number and be 6 characters long)</label>
         <input
           type="password"
           name="new-password"
-          id="new-password-input"
+          id="new-password-input" 
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
           required
         />
         <br />
