@@ -107,10 +107,14 @@ const handleUsers = (request, response) => {
   request.on("data", chunk => {
     data += chunk;
   });
+  
   request.on("end", () => {
-    hashData(data, (err, res_one) => {
+    data = JSON.parse(data)
+    console.log(data)
+    console.log(data.password)
+    hashData(data.password, (err, res_one) => {
       storePwd(res_one, (err, res) => {
-        console.log(res_one);
+        console.log('backend password', res_one);
         if (err) console.log(err);
         response.writeHead(200, { "content-type": "application/json" });
         response.end();
