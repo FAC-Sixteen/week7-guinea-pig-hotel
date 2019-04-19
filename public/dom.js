@@ -78,7 +78,7 @@ document.getElementById("new-login-button").addEventListener("click", () => {
 
 getRooms();
 getFreeRooms();
-passwordData();
+// passwordData();
 
 const updateLoginPage = loginData => {
   const { guinea_id, guinea_name, room_num } = loginData;
@@ -113,17 +113,19 @@ const fetchCheckin = guineaData => {
 };
 
 const fetchLogin = loginData => {
+  console.log(JSON.stringify(loginData));
   fetch("/log-in", {
     method: "POST",
     body: JSON.stringify(loginData)
   })
     .then(res => res.json())
-    .then(json => incorrectLogin(json))
+    .then(json => {
+      console.log(json);
+      incorrectLogin(json);
+    })
     .catch(() => console.log("no data"));
 };
 
-getRooms();
-getFreeRooms();
 new_login_form.style.display = "none";
 
 check_in_form.addEventListener("submit", event => {
