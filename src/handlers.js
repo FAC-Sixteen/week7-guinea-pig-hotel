@@ -5,6 +5,8 @@ const getData = require("./queries/getData");
 const postData = require("./queries/postData");
 const hashData = require("./pwdGenerate");
 const storePwd = require("./queries/hashData.js");
+const jwt = require('jsonwebtoken');
+const secret = process.env.secret;
 
 const handlerHome = (request, response) => {
   fs.readFile(
@@ -128,6 +130,7 @@ const handleLogIn = (request, response) => {
   });
   data = JSON.parse(data);
   const { username, password } = data;
+
   console.log({ username, password });
   postData.checkUsername(username, (err, res) => {
     if (err) console.log(err);
