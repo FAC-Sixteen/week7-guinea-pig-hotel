@@ -58,23 +58,23 @@ const getFreeRooms = () => {
 };
 
 const passwordData = data => {
-   fetch("/createusers", {
+  fetch("/createusers", {
     method: "POST",
     body: JSON.stringify(data)
-  })
-    // .then(res => res.json())
-    // .then(response => console.log(response.body))
-    // .catch(error => console.log(error));
+  });
+  // .then(res => res.json())
+  // .then(response => console.log(response.body))
+  // .catch(error => console.log(error));
 };
 
-new_login_form.addEventListener("submit", (e) => {
+new_login_form.addEventListener("submit", e => {
   e.preventDefault();
   let user = {
-    username: e.target['new-username'].value,
-    password: e.target['new-password'].value
-  }
- 
-  passwordData(user)
+    username: e.target["new-username"].value,
+    password: e.target["new-password"].value
+  };
+
+  passwordData(user);
 });
 
 //   fetch("/createuser")
@@ -84,7 +84,6 @@ new_login_form.addEventListener("submit", (e) => {
 
 getRooms();
 getFreeRooms();
-
 
 const updateLoginPage = loginData => {
   const { guinea_id, guinea_name, room_num } = loginData;
@@ -119,17 +118,19 @@ const fetchCheckin = guineaData => {
 };
 
 const fetchLogin = loginData => {
+  console.log(JSON.stringify(loginData));
   fetch("/log-in", {
     method: "POST",
     body: JSON.stringify(loginData)
   })
     .then(res => res.json())
-    .then(json => incorrectLogin(json))
+    .then(json => {
+      console.log(json);
+      incorrectLogin(json);
+    })
     .catch(() => console.log("no data"));
 };
 
-getRooms();
-getFreeRooms();
 new_login_form.style.display = "none";
 
 check_in_form.addEventListener("submit", event => {
