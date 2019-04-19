@@ -12,4 +12,14 @@ const hashPwd = (myPlaintextPassword, cb) => {
   });
 };
 
-module.exports = hashPwd;
+const comparePasswords = (password, hashedPassword, callback) => {
+  bcrypt.compare(password, hashedPassword, (err, res) => {
+    if (err) {
+      callback(new Error(err));
+    } else {
+      callback(null, res);
+    }
+  });
+};
+
+module.exports = { hashPwd, comparePasswords };
