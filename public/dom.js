@@ -73,7 +73,7 @@ const updateLoginPage = loginData => {
   getRooms();
 };
 
-const incorrectLogin = loginData => {
+const login = loginData => {
   const { username, password } = loginData;
   if (username === false) {
     errorMessage.textContent =
@@ -81,6 +81,8 @@ const incorrectLogin = loginData => {
   } else if (password === false) {
     errorMessage.textContent =
       "incorrect password, please enter the correct password";
+  } else {
+    window.location = "/user-page";
   }
 };
 
@@ -103,7 +105,7 @@ const fetchLogin = loginData => {
     .then(res => res.json())
     .then(json => {
       console.log(json);
-      incorrectLogin(json);
+      login(json);
     })
     .catch(() => console.log("no data"));
 };
