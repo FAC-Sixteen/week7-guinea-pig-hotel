@@ -74,6 +74,9 @@ const guineaRoom = (roomNum, guineaId, cb) => {
 };
 
 const checkUsername = (username, cb) => {
+  console.log(
+    `SELECT username, password FROM users WHERE username = ${username}`
+  );
   databaseConnection.query(
     "SELECT username, password FROM users WHERE username = $1",
     [username],
