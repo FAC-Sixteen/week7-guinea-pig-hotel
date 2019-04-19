@@ -5,6 +5,8 @@ const getData = require("./queries/getData");
 const postData = require("./queries/postData");
 const { hashPwd, comparePasswords } = require("./pwdGenerate");
 const storePwd = require("./queries/hashData.js");
+const jwt = require('jsonwebtoken');
+const secret = process.env.secret;
 
 const handlerHome = (request, response) => {
   fs.readFile(
