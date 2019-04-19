@@ -3,12 +3,30 @@ const path = require("path");
 const querystring = require("querystring");
 const getData = require("./queries/getData");
 const postData = require("./queries/postData");
-const hashData = require("./pwdGenerate");
+const { hashPwd, comparePasswords } = require("./pwdGenerate");
 const storePwd = require("./queries/hashData.js");
 
 const handlerHome = (request, response) => {
   fs.readFile(
     path.join(__dirname, "..", "public", "index.html"),
+    (error, file) => {
+      if (error) {
+        console.log(error);
+        response.writeHead(500, { "Content-Type": "text/html" });
+        response.end("<h1>500: server error</h1>");
+      } else {
+        response.writeHead(200, {
+          "Content-Type": "text/html"
+        });
+        response.end(file);
+      }
+    }
+  );
+};
+
+const handlerUserPage = (request, response) => {
+  fs.readFile(
+    path.join(__dirname, "..", "public", "userPage.html"),
     (error, file) => {
       if (error) {
         console.log(error);
@@ -107,12 +125,12 @@ const handleUsers = (request, response) => {
   request.on("data", chunk => {
     data += chunk;
   });
-  
+
   request.on("end", () => {
-    data = JSON.parse(data)
+    data = JSON.parse(data);
     hashData(data.password, (err, res_one) => {
       storePwd(res_one, (err, res) => {
-        console.log('backend password', res_one);
+        console.log("backend password", res_one);
         if (err) console.log(err);
         response.writeHead(200, { "content-type": "application/json" });
         response.end();
@@ -133,12 +151,24 @@ const handleLogIn = (request, response) => {
     data = JSON.parse(data);
     const { username, password } = data;
     console.log({ username, password });
-    postData.checkUsername(username, (err, res) => {
+    postData.checkUsername(username, (err, usernameRes) => {
       if (err) console.log(err);
       response.writeHead(200, { "content-type": "application/json" });
-      console.log({ res });
-      if (res.length === 0) {
+      console.log({ usernameRes });
+      if (usernameRes.length === 0) {
         response.end(JSON.stringify({ username: false, password: false }));
+      } else {
+        comparePasswords(password, usernameRes.password, (err, pwdRes) => {
+          if (err) console.log(err);
+          else {
+            if (!pwdRes) {
+              response.end(JSON.stringify({ username: true, password: false }));
+            } else if (pwdRes) {
+              response.writeHead(302, { Location: "/user-page" });
+              response.end();
+            }
+          }
+        });
       }
     });
   });
@@ -146,6 +176,7 @@ const handleLogIn = (request, response) => {
 
 module.exports = {
   handlerHome,
+  handlerUserPage,
   handlerPublic,
   handleRoomData,
   handleCheckIn,

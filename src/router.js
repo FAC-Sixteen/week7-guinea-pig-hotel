@@ -5,6 +5,8 @@ const router = (request, response) => {
     handlers.handlerHome(request, response);
   } else if (request.url.includes("/public/")) {
     handlers.handlerPublic(request, response);
+  } else if (request.url === "/user-page") {
+    handlers.handlerUserPage(request, response);
   } else if (request.url === "/rooms") {
     handlers.handleRoomData(request, response);
   } else if (request.url === "/frees") {

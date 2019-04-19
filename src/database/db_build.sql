@@ -59,6 +59,6 @@ VALUES
   username, password
   )
 VALUES
-  ('username', 'password');
+  ('testusername', '$2b$10$y2l5lzj0ZWVXDg7jDyBU9.EGW6NQ3zE17UjW.QCR3IdYR0nfF2ZUu');
 
 COMMIT;
