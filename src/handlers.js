@@ -25,6 +25,7 @@ const handlerHome = (request, response) => {
 };
 
 const handlerUserPage = (request, response) => {
+  console.log("I have been called");
   fs.readFile(
     path.join(__dirname, "..", "public", "userPage.html"),
     (error, file) => {
@@ -128,11 +129,11 @@ const handleUsers = (request, response) => {
 
   request.on("end", () => {
     data = JSON.parse(data);
-    hashData(data.password, (err, res_one) => {
-      storePwd(res_one, (err, res) => {
+    hashPwd(data.password, (err, res_one) => {
+      storePwd(data.username, res_one, (err, res) => {
         console.log("backend password", res_one);
         if (err) console.log(err);
-        response.writeHead(200, { "content-type": "application/json" });
+        response.writeHead(302, { Location: "/" });
         response.end();
       });
     });
@@ -158,14 +159,17 @@ const handleLogIn = (request, response) => {
       if (usernameRes.length === 0) {
         response.end(JSON.stringify({ username: false, password: false }));
       } else {
-        comparePasswords(password, usernameRes.password, (err, pwdRes) => {
-          if (err) console.log(err);
-          else {
+        comparePasswords(password, usernameRes[0].password, (err, pwdRes) => {
+          console.log(pwdRes);
+          if (err) {
+            console.log(err);
+          } else {
             if (!pwdRes) {
               response.end(JSON.stringify({ username: true, password: false }));
+              return;
             } else if (pwdRes) {
-              response.writeHead(302, { Location: "/user-page" });
-              response.end();
+              console.log("redirecting...");
+              response.end(JSON.stringify({ username: true, password: true }));
             }
           }
         });
