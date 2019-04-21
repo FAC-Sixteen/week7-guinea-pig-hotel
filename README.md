@@ -32,7 +32,7 @@ https://guinea-guesthouse.herokuapp.com/
 - [x] After check-in, the guinea pig is given a username and asked to set a password
 - [x] The password is hashed and put into the database
 - [x] Login form for later
-- [ ] On login, the guinea pig is redirected to a personal page, which shows their details
+- [x] On login, the guinea pig is redirected to a personal page, which shows their details
 - [ ] Personal page allows them to log out
 
 ### Stretch
@@ -58,10 +58,12 @@ Updated user journey:
 - Time (again)
 - Getting the database to send data back to the frontend via the server
 - Understanding of which thing to use where - cookies/hashing/web storage????
+- Redirecting to a 'logged in' page via the server after password validation
 
 ## Cool stuff we learned
 
 ![learning to swim](https://media.giphy.com/media/spyqGD3KIuDkY/giphy.gif)
 
-- Turns out `fetch` can be used for POST as well as GET requests
-- Sometimes saying 'enough is enough' and stopping is better than repeatedly trying at something
+- Turns out `fetch` can be used for POST as well as GET requests - and you can use it to update the DOM
+- If you're using `fetch`, you can't easily redirect using the server
+- `window.location` in the DOM
